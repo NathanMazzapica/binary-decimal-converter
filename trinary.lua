@@ -6,23 +6,38 @@
 
 -- start y from 1 and multiply by 2 until y >= x
 
-local toConvert = 18
+local toConvert = 6
 
 local binaryPlaces = { 1 }
 
-local i = 1
+local binaryDigit = 1
 
-while( i < toConvert ) do
-    i = i * 2
-    if ( i > toConvert ) then break end
-    table.insert( binaryPlaces, i )
+
+while( binaryDigit < toConvert ) do
+    binaryDigit = binaryDigit * 2
+    if ( binaryDigit > toConvert ) then break end
+    table.insert( binaryPlaces, 1, binaryDigit )
 end
 
+
+local binaryString = ""
+for k, v in ipairs( binaryPlaces ) do
+    if ( toConvert - v >= 0 ) then
+        toConvert = toConvert - v
+        binaryString = binaryString .. "1"
+    else
+        binaryString = binaryString .. "0"
+    end
+end
+
+
+
+print(binaryString)
+
+-- util function
 function PrintTable( tableToPrint )
     for k, v in ipairs( tableToPrint ) do
         print( v )
     end
 end
-
-PrintTable( binaryPlaces )
 
