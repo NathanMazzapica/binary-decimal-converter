@@ -1,4 +1,4 @@
-
+local natesutils = require("natesutils")
 --first lets make binary converter :D
 
 -- if x - y >= 0, y = true
@@ -34,10 +34,4 @@ end
 
 print(binaryString)
 
--- util function
-function PrintTable( tableToPrint )
-    for k, v in ipairs( tableToPrint ) do
-        print( v )
-    end
-end
-
+natesutils.PrintTable( binaryPlaces )

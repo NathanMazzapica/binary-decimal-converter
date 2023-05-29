@@ -2,6 +2,8 @@
 -- Will work for any base x system... theoretically... as long as the number to convert is less than the step
 -- So I guess that makes it an xnary converter? No clue.
 
+local natesutils = require("natesutils")
+
 local toConvert = 100
 
 local numericPlaces = { 1 }
@@ -62,13 +64,5 @@ end
 
 print("Result : " .. resultString)
 
--- util function
-function PrintTable( tableToPrint )
-    local toPrint = ""
-    for k, v in ipairs( tableToPrint ) do
-        toPrint = toPrint .. v .. " "
-    end
-    print("Digits : " .. toPrint)
-end
 
-PrintTable(numericPlaces)
+natesutils.PrintTable(numericPlaces)
