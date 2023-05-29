@@ -1,13 +1,14 @@
 -- okay now its time to make the x<10-nary converter. 
---Will work for any number system up to 9
+-- Will work for any base x system... theoretically... as long as the number to convert is less than the step
+-- So I guess that makes it an xnary converter? No clue.
 
-local toConvert = 32
+local toConvert = 100
 
 local numericPlaces = { 1 }
 
 local initialDigit = 1
 
-local step = 4
+local step = 6
 
 -- 11 in base 4
 --1 4 16
@@ -28,24 +29,29 @@ local resultString = ""
 for k, place in ipairs( numericPlaces ) do
     local foundMatch = false
     for i = step - 1, 1, -1 do
-        if( toConvert <= 0 ) then break end
+        
         local check = (place * i)
         local result = toConvert - check
 
-        print( "i am at place " .. place )
-        print( "i am checking " .. check )
-        print( "result is " .. result )
         
         if ( result >= 0 and not foundMatch ) then
-            print("I found a match!")
+
             toConvert = result
             resultString = resultString .. tostring(i)
             foundMatch = true
             
-        elseif ( i == 1 and result <= 0 and not foundMatch ) then -- we need to append trailing zeros
+        elseif ( i == 1 and result <= 0 and not foundMatch ) then -- we need to append trailing zeros. if answer is found
             
             print( "appending 0" )
             resultString = resultString .. "0"
+        end
+        if ( toConvert <= 0 ) then 
+            for j = k, #numericPlaces - k do
+                resultString = resultString .. "0"
+            end
+
+            break
+
         end
     end
 end
@@ -58,9 +64,11 @@ print("Result : " .. resultString)
 
 -- util function
 function PrintTable( tableToPrint )
+    local toPrint = ""
     for k, v in ipairs( tableToPrint ) do
-        print( v )
+        toPrint = toPrint .. v .. " "
     end
+    print("Digits : " .. toPrint)
 end
 
 PrintTable(numericPlaces)
